@@ -1,0 +1,63 @@
+# test strong recommends
+#
+# with normal recommends, the solver will
+# not backtrack to fulfill them.
+#
+repo system 0 testtags <inline>
+#>=Pkg: A 1 1 noarch
+#>=Con: C
+#>=Pkg: A2 1 1 noarcho alable 0 testtags <inline>
+#>=Pkg: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 2 1 noarcs <inline>
+#>=Pkg: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 2 1 noarch#>=Pkg: AP 3 1 noarch
+#>=Prv: A  A = 3.1
+#>=Pkg: A 2 2 i686
+#>=Req: BBB > 5
+#>=Pkg: B 1 1 src
+#>=Pkg: A 2 2 badarch
+#>=Pkg: C 2 2 badarch
+#>=Pkg: D 2 2 badarch
+#ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออwithdisabled
+disable pkg A-3-1.noarch@available
+
+job install name A [forcebest]
+result transaction,problems <inline>
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::h
+#>=Pkg: AP 3 1 noarch
+#>=Prv: A = 3.1
+#>=Pkg: A 2 2 i686
+#>=Req: BBB > 5
+#>=Pkg: B 1 1 src
+#>=Pkg: A 2 2 badarch
+#>=Pkg: C 2 2 badarch
+#>=Pkg: D 2 2 badarch
+#>=Pkg::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::rch
+#>=Vnd: foo
+#>=Con: A = 3-1
+repo available 0 testtags <inline>
+#>=Pkg: A 2 1 noarch
+#>=Vnd: foo
+#>=Pkg: A 3 1 noarch
+#>=Vnd: bar
+system i686 rpm system
+
+poolflags whatprovideswithdisabled
+disable pkg A-3-1.noarch@available
+
+job install name A [forcebest]
+result transaction,problems <inline>
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+#>=Con: C2
+repo available 0 testtags <inline>
+#>=Pkg: A 1 2 noarch
+#>=Pkg: B 1 1 noarch
+#>=Rec: C
+#>=Pkg: C 1 1 noarch
+#>=Pkg: B2 1 1 noarch
+#>=Rec: C2
+#>=Pkg: C2 1 1 noarch
+system i686 rpm system
+solverflags strongrecommends
+job install name B
+job install name B2
+result transaction,problems <inline>
+#>install B-1-1.noarc
