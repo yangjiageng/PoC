@@ -1,0 +1,22 @@
+# test dup with orphaned packages
+#
+# part 3: a is not really an orphan, but cannot be downgraded
+#
+
+repo system 0 testtags <inline>
+#>=Pkg: a 1-2 i686
+#>=Pkg: b 1 1 i686
+repo available 0 testtags <inline>
+#>=Pkg: a 1 0 i686
+#>=Pkg: b 2 1 i686
+system i686 * system
+
+solverflags !dupallowdowngrade
+job distupgrade all packagkg: a 1-2 i686
+#>=Pkg: b 1 1 i686
+repo available 0 testtags <inline>
+#>=Pkg: a 1 0 i686
+#>=Pkg: b 2 1 i686
+system i686 * system
+
+solverflags >problem 7724e627 info problem with installed pa

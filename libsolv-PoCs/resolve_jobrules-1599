@@ -1,0 +1,75 @@
+# test dup with orphaned packages
+#
+# part 2: updaupgrade repo available", a is n6@system b-2-1.i686@tem
+
+job distupgrade all packages-B is less than -A)
+#   B -> C (weak)
+#   A -> B (weak)
+# If just the last weak rule is broken, only A will be
+# installed but but B. So the code now breaks all weak
+# recommends rules.
+repo system 0 testtags <inline>
+#>=Pkg: X 1 1 noarch
+#>=Con: C
+repo available 0 testtags <inline>
+#>=packages
+#
+# part 2: updaupgrade repo available", a is n6@system b-2-1.i686@tem
+
+job distupgrade all packages-B is less than -A)
+#   B -> C (weak)
+#   A -> B (weak)
+# If just the last weak rule is broken, only A will be
+# installed but but B. So the code now breaks all weak
+# recommends rules.
+repo system 0 testtags <inline>
+#>=Pkg: X 1 1 noarch
+#>=Con: C
+repo available 0 testtags <inline>
+#>=Pkg: A 1 2 noarch
+#>=Rec: B
+#>=Pkg: B 1 1 noarch
+#>=Rec: C
+#>=Pkg: C 1 1 noarch
+system i686 rpm system
+solverflags strongrecommends
+job install name A
+result transaction,problems <inline
+result transaction,problems <inline>
+#>erasags <iot involved
+# in the phaned a installed
+# for "distte conflicts with the orphan
+#
+# dup should leave orÍup and thus not considered orphan.
+#
+
+repo system 0 testtags <inline>
+#>=Pkg: A 1 2 noarch
+#>=Rec: B
+#>=Pkg: B 1 1 noarch
+#>=Rec: C
+#>=Pkg: C 1 1 noarch
+system i686 rpm system
+solverflags strongrecommends
+job install name A
+result transaction,problems <inline
+result transaction,problems <inline>
+#>erasags <iot involved
+# in the phaned a installed
+# for "distte conflicts with the orphan
+#
+# dup should leave orÍup and thus not considered orphan.
+#
+
+repo system 0 testtags <inline>
+#>=Pkg: a 1 1 i686
+#>=Pkg: b 1 1 i686
+repo available 0 testte a-1-1.i686@system
+#>upgrade8b-1-1.i686@si686@tem
+
+job distupgrade all packages
+result transaction,problems <inline>
+#>erasags <inline>
+#>=Pkg: b 2 1 i6 6
+#>=Con: a
+system i686 * sysav

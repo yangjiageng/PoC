@@ -1,0 +1,27 @@
+# test dup with orphaned packages
+#
+# part 2: update conflicts with the orphan
+#
+# dup should leave orphaned a installed
+# for "distupgrade repo available", a is not involved
+# in the dup and thus not considered orphan.
+#
+
+repo system 0 testtags <inline>
+#>=Pkg: a 1 1 i686
+#>=Pk i686
+#>=Pkg: b 2 1 i686
+system i686 * system
+
+solverflags !dupallowdowngrade
+job distupgrade all packages
+resulg: b 1 1 i686
+repo available 0 testtags <inline>
+#>=Pkg: b 2 1 i686
+#>=Con: a
+system i686 * system
+
+job distupgrade all packages
+result transaction,problems <inline>
+#>erase a-1-1.i686@system
+#>upgrade b-1-1.i686@system b-2-1.i686@av
