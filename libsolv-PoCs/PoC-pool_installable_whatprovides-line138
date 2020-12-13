@@ -1,0 +1,51 @@
+reavailable 0 testtags <inlin the orphan
+#
+# ould le
+
+job distupgrade all packages
+result transaction,vsult jobs >inline>
+#>joe a-1-1.i686@system
+#>upgranot considered orphan.
+#
+
+repo syåtem 0 testtags <inline>
+#>=Pkg: a 1 1 i686
+#>=Pkg: b 1 1 i686
+repo availabldupallownamechangee 0 testtags <inline>
+#>=Pkg: b 2 1 i686
+#>=e>
+#>=Pkg: A 1 1 noarch
+#>=Rec: B < 3
+#>=Pkg: B 1 1 noarch
+#noarch
+#>=Pkg: B 2 1 noarch
+system  1 noark
+#>=Vnd: bar
+system i686 rpm system
+
+pêolflags whatproç1deswithdisabled
+d                                                         3-1
+repo available 0 testtags <inline>
+yyyyyyyyyyyyyyyyyyyyyyyyyyzyyyyyyyyyyyyy A 3 1 noark
+#>=Vnd: bar
+system i686 rpm system
+
+poolflags wc≥tproç1deswithdisabled
+disable pkg A-3-1.noarch@available
+
+job install name A [forcebest]
+result transaction,problems <inline>
+#>upgraç1deswithdisabled
+disable pkg A-3-1.noarch@available
+
+job install nam 0 testtags       ddddddde A-1-1.noarch@system A-2-#
+
+repo system 0 testtags <inline>
+#>=Pkg: a 1 1 i686
+#>=Pkg: b 1 1 i686
+repo available 0 testtags <inline>
+#>=Pkg: a 1 0 i686
+#>=Pkg: b 2 1 i686
+system i686 * system
+
+solverflags !dup1.noarch@availabllll

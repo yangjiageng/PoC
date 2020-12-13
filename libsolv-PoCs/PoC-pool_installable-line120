@@ -1,0 +1,52 @@
+repo system 0 testtags <inline>
+#>=Pkg: A 1 1 noarch
+#>=Vnd: foo
+#>=Pkg: D 1 1 noarch
+#>=Vnd: foo
+#>=Con: A = 3-1
+repo available 0 testtags <inline>
+#>=Pkg: A 2 1 noarch
+#>=Vnd: foo
+#>=Pkg: A 3 1 noarch
+#>=Vnd: bar
+system i686 rpm system
+
+poolflags whatprovideswithdisabled
+disable pkg A-3-1.noarch@available
+
+job install name A [forcebest]
+result transaction,problems <inline>
+#>upgrade A-1-1.noarch@system A-2-1x86_64
+#>=Pkg: k-l 1 0 x86_64
+#>=Req: k = 1-0
+#>=Pkg: k-freak-1-0 1 0 x86_65
+#>=Req: k = 1-0
+#>=Pkg: k 1 1 x86_64
+#>=Pkg: k-m 1 1 x86_64
+#>=Req: k = 1-1
+#>=Pkg: k 2 0 x86_64
+#>=Pkg: k-m 2 0 x86_64
+#>=Req: k = 2-0
+#>=Pkg: k 3 0 x86_64
+#>=Pkg: k-m 3 0 x86_64
+#>=Req: k = 3-0
+repo available 0 testtags <inline>
+#>=Pkg: k 3 1 x86_64
+#>=Pkg: k-m 3 1 x86_64
+#>=Req: k = 3-1
+#>=Pkg: k 3 6 x86_64
+#>=Pkg: k-m 3 6 x86_64
+#>=Req: k = 3-6
+#>=Pkg: c 1 1 noarch
+#>=Con: k = 3-6
+system x86_64 rpm system
+poolflags implicitobsoleteusescolors
+
+job multiversion provides k
+job multiversioo provides k- a 2 1 i686
+#>=Pkge b = 3­1
+MM%oÿ·¬ĞëUŒï0áW»^¡ôÚR ú â ³­€Í0‡r0^ñ<)ƒä«{w–Unéºt·ÔúQ}ÅqOP                                                                                                                                                a 3 1 i686
+#>úÒFlEci;Jåc>µnX@xÈÇ···™ü¼ßG‚>Ï3-1.x86_64@available
+#>install k-m-3-1.x86_64@available
+#>install.noarch@available
+
